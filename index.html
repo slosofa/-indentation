@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Отступы в вёрстке: margin и padding</title>
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+
+    <body>
+        <article>
+            <section class="header section">
+                <div class="container">
+                    <h1 class="header__title">Отступы в вёрстке: margin и padding</h1>
+                    <p class="header__pharagraph pharagraph">В этой статье я рассмотрю самые популярные "стандартные" решения для сохранения смысла и хорошей читаемости вашего кода. Если точнее — речь пойдет об основных правилах организации отступов. Они сильно влияют на общую функциональность кода и, если всё сделано верно, позволяют легко вносить изменения в любую его часть. При этом другие части кода продолжат нормально работать.</p>
+                    <p class="header__pharagraph">Как это часто бывает, знание базовых принципов поможет проявить гибкость и выйти за их пределы. Эти знания особенно важны для начинающих, но также будут полезным напоминанием и для более опытных верстальщиков. Итак, поговорим о фундаментальных основах работы с отступами в вёрстке.</p>
+                </div>
+            </section>
+            
+            <section class="navigation section">
+                <nav class="container_bg-color_gray">
+                    <h2 class="navigation__title title_nav">Содержание:</h2>
+                    <ol class="navigation__list">
+                        <li class="navigation__item item"><a class="navigation__link" href="#next-element">Отступ задается от предыдущего элемента к следующему</a></li>
+                        <li class="navigation__item item"><a class="navigation__link" href="#last-element"></a>Отступ задается последнему возможному элементу в DOM-дереве</li>
+                        <li class="navigation__item"><a class="navigation__link" href="#zero-indent">Для последнего элемента группы отступ обнуляется</a></li>
+                    </ol>
+                </nav>
+            </section>
+            
+            <section id="next-element" class="next-element section">
+                <div class="container">
+                    <h3 class="next-element__title title">Отступ задается от предыдущего элемента к следующему: от первого ко второму, сверху вниз, слева направо.</h3>
+                    <img class="next-element__image" src="image/magrin-right-bottom.jpg" alt="пример присвоения правого и нижнего margin">
+                    <div class="next-element__text">
+                        <p class="next-element__pharagraph pharagraph"> <strong>ВАЖНО: </strong> margin всегда задают от предыдущего элемента к следующему.</p>
+                        <p class="next-element__pharagraph pharagraph">Свойство margin необходимо только для того, чтобы отодвинуть своего соседа справа или снизу, поэтому используется margin-right и margin-bottom.</p>
+                        <p class="next-element__pharagraph pharagraph">(!) Свойства margin-left и margin-top используются крайне редко.</p>
+                        <p class="next-element__pharagraph">Для padding верно обратное. Исключением является его применения в декоративных целях, например, для увеличения области ссылки.</p>
+                    </div>
+                    
+                    <div class="next-element__text">
+                        <p class="next-element__pharagraph pharagraph">Отступ внутри блока сверху или слева реализуется через padding-top и padding-left родителя.</p>
+                        <p class="next-element__pharagraph pharagraph">Отступы, как правило, делают в направлении от предыдущего элемента к следующему. Так элемент не будет толкать сам себя.</p>
+                        <p class="next-element__pharagraph">Изначально элемент статичен, а его положение может меняться только под воздействием свойств других блоков или свойств родителя.</p>
+                    </div>
+                    <img class="next-element__image" src="image/padding-left-top.jpg" alt="пример присвоения внутренних отсутпов левым и верхним padding">
+                </div>
+            </section>
+
+            <section id="last-element" class="last-elemt section">
+                <div class="container">
+                    <h3 class="last-element__title title">Отступ задается последнему возможному элементу в DOM-дереве</h3>
+                    <p class="last-element__pharagraph pharagraph">Вообще, margin задают исключительно между соседними элементами DOM-дерева. Для примера, посмотрите на этот список:</p>
+                    <img class="last-element__image image" src="image/margin-last-element-html.jpg" alt="пример присвоения margin между элементами в html коде">
+                    <img class="last-element__image image" src="image/margin-last-element-brouser.jpg" alt="пример присвоения margin между элементами на странице">
+                    <p class="last-element__pharagraph pharagraph">Отступ делают за счёт соседних элементов, а не дочерних:</p>
+                    <figure class="last-element__figure">
+                        <img class="last-element__image" src="image/neighboring-element.jpg" alt="пример отступа между соседними элементами">
+                        <figcaption class="last-element__figcaption">ВАЖНО: здесь .list-item — последний возможный элемент в котором мы задаём отступ, чтобы разделить списки.</figcaption>
+                    </figure>
+                    <p class="last-element__pharagraph pharagraph">Казалось бы, можно задать отступ параграфу &lt;p&gt;, либо обёртке &lt;article&gt; для достижения той же цели. Внешне останется все точно также, но так делать не рекомендуется.</p>
+                    <p class="last-element__pharagraph pharagraph">Предыдущий пример был достаточно простым, но бывает вложенность значительно больше.</p>
+                    <img class="last-element__image image" src="image/title.jpg" alt="пример вложенности заголовка">
+                    <p class="last-element__pharagraph pharagraph">В случае с заголовком, если ему необходим отступ сверху, последним элементом будет section. Именно для него задается padding-top, а не div с классом container. Свойства margin, которые стоят по умолчанию необходимо обнулить.</p>
+                    <img class="last-element__image image" src="image/padding-for-section.jpg" alt="пример верного применения отсупов при верстке заголовка">
+                    <p class="last-element__pharagraph">Это необходимо для более простого поиска отступов в будущем — для вас или того, кто будет верстать после вас. Кроме того, возможны серьёзные проблемы при динамическом дублировании или выводе вёрстки с нестандартной структурой отступов.</p>                    
+                </div>
+            </section>
+
+            <section id="zero-indent" class="zero-indent section">
+                <div class="container">
+                    <h3 class="zero-indent__title title" >Для последнего элемента группы отступ всегда обнуляется</h3>
+                    <p class="zero-indent__pharagraph pharagraph">Для наглядности возьмём наш предыдущий пример с рецептами</p>
+                    <p class="zero-indent__pharagraph pharagraph">Между рецептами расстояние одинаковое. Можно заметить, что и до следующего блока расстояние такое же.</p>
+                    <img class="zero-indent__image image" src="image/indent-recipes.jpg" alt="пример одинаковых отступов на сайте">
+                    <p class="zero-indent__pharagraph pharagraph">В соответствии со вторым принципом: последний margin обнуляется, а нижний отступ задаётся через padding для section. Я чаще всего задаю padding для секции с обоих сторон, если расстояние между секциями 100px задаю секциям padding-top:50px и padding-bottom:50px.</p>
+                    <img class="zero-indent__image image" src="image/margin-recipes.jpg" alt="наглядный пример обнуления margin у последнего элемента списка">
+                    <img class="zero-indent__image image" src="image/margin-recipes-html.jpg" alt="html код списка">
+                    <p class="zero-indent__pharagraph pharagraph">Для большего понимания рассмотрим другой пример, который часто встречается на практике:</p>
+                    <img class="zero-indent__image image" src="image/cite-header.jpg" alt="изображение шапки сайта">
+                    <img class="zero-indent__image image" src="image/cite-header-html.jpg" alt="html код шапки сайта">
+                    <p class="zero-indent__pharagraph pharagraph">Здесь нас интересует отступ между пунктами меню и списком с кнопкой поиска. Отступы между пунктами меню задаются так:</p>
+                    <img class="zero-indent__image image" src="image/margin-right-li.jpg" alt="присвоение отступа между пунктами меню посредством свойства margin-right">
+                    <p class="zero-indent__pharagraph pharagraph">Советую использовать псевдоклассы :last-child чаще других, например так:</p>
+                    <img class="zero-indent__image image" src="image/last-child.jpg" alt="способы обнуления отступа последнего элемента посредством применения псевдокласса last-child">
+                </div>
+            </section>
+
+            <section class="results section">
+                <div class="container_bg-color_gray">
+                    <h2 class="results__title title_nav">Подытожим:</h2>
+                    <ul class="results__list">
+                        <li class="results__item item">— отступы задаём от предыдущего элемента к следующему</li>
+                        <li class="results__item item">— используем только margin-right и margin-bottom</li>
+                        <li class="results__item item">— внешние отступы задаются только между соседями</li>
+                        <li class="results__item item">— внутренний отступ задаём самому верхнему элементу в дом дереве</li>
+                        <li class="results__item">— последнему элементу группы отступ всегда обнуляем</li>
+                    </ul>
+                    <p class="results__pharagraph">Конечно бывают исключения. Ведь макеты бывают различной сложности. Иногда базовые принципы приходится нарушать в угоду дизайнерского решения или простоты вёрстки. Но для этого эти принципы необходимо хорошо знать.</p>
+                </div>
+            </section>
+        
+        </article>
+    </body>
+
+</html>
